@@ -2,7 +2,7 @@
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
 
-	let darkMode = false;
+	let darkMode = true;
 </script>
 
 <div class={darkMode && 'dark'}>
