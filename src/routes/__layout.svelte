@@ -6,7 +6,7 @@
 </script>
 
 <div class={darkMode && 'dark'}>
-	<div class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-700">
+	<div class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800">
 		<Header />
 
 		<main class="flex-grow">
