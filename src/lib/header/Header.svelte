@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Burger from './burger.svg';
+	import Icon from '$lib/icon.svelte';
 </script>
 
 <header
@@ -7,10 +7,16 @@
 >
 	<div>
 		<button class="p-4 h-full hover:bg-primary-700">
-			<Burger />
+			<Icon name="burger" class="h-8" />
 		</button>
 	</div>
-	<a href="/" class="justify-self-center px-4 text-3xl hover:bg-primary-700 flex items-center">
-		Find My Doggo
-	</a>
+	<div class="flex items-center justify-center">
+		<a
+			href="/"
+			class="h-full px-4 text-xl md:text-3xl whitespace-nowrap hover:bg-primary-700 flex items-center"
+		>
+			<Icon name="search" class="hidden md:block mr-3 h-10" />
+			Find My Doggo
+		</a>
+	</div>
 </header>
