@@ -10,6 +10,7 @@
 </script>
 
 <button
+	class={$$props.class}
 	on:click={darkMode.toggle}
 	on:contextmenu|preventDefault={() => {
 		const wantToReset = confirm('Do you want to reset the theme to your system preference ?');
