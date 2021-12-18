@@ -1,14 +1,16 @@
-import { writable } from 'svelte/store';
+import { type Writable, writable } from 'svelte/store';
 
-export function createDarkMode() {
+type DarkModeStore = Partial<Writable<boolean>> & {
+	toggle: () => void;
+	reset: () => void;
+};
+
+export function createDarkMode(): DarkModeStore {
 	const { subscribe, set, update } = writable(false);
 
 	return {
 		subscribe,
-		set: (mode) => {
-			localStorage.dark = mode;
-			set(mode);
-		},
+		set,
 		toggle: () => {
 			update((mode) => {
 				localStorage.dark = !mode;
