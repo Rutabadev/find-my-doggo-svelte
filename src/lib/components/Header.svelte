@@ -1,6 +1,7 @@
 <script lang="ts">
 	import DarkThemeToggle from '$lib/components/DarkThemeToggle.svelte';
 	import Icon from '$lib/utils/icon.svelte';
+	import LanguageSelect from './LanguageSelect.svelte';
 </script>
 
 <header
@@ -10,8 +11,8 @@
 		<button class="p-4 h-full hover:bg-primary-700 lg:hidden">
 			<Icon name="burger" class="h-8" />
 		</button>
-		<div class="hidden lg:block">select language</div>
-		<DarkThemeToggle class="hidden lg:block" />
+		<LanguageSelect class="max-lg:hidden ml-4" />
+		<DarkThemeToggle class="max-lg:hidden" />
 	</div>
 	<div class="flex items-center justify-center">
 		<a

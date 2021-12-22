@@ -5,10 +5,12 @@
 </script>
 
 <div class:dark={$darkMode}>
-	<div class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800">
+	<div
+		class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50"
+	>
 		<Header />
 
-		<main class="flex-grow">
+		<main class="mx-auto p-6 flex-grow max-w-xl">
 			<slot />
 		</main>
 	</div>

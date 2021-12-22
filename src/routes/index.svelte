@@ -9,4 +9,4 @@
 	<title>Find My Doggo Svelte</title>
 </svelte:head>
 
-<section />
+<p>Trouve le doggo qui te correspond le mieux (divulgachage, tous)</p>

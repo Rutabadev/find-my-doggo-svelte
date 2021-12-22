@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors');
+const { screens } = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	content: ['./src/**/*.{html,svelte,svg,ts}'],
@@ -8,6 +9,9 @@ module.exports = {
 			colors: {
 				primary: colors.indigo,
 			},
+			screens: {
+				'max-lg': { max: screens.lg }
+			}
 		},
 	},
 	variants: {
