@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { darkMode } from '$lib/stores';
 	import { onMount } from 'svelte';
+
 	onMount(() => {
 		const startingDarkMode =
 			localStorage.dark === 'true' ||

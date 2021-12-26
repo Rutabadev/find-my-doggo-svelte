@@ -11,8 +11,8 @@
 		<button class="p-4 h-full hover:bg-primary-700 lg:hidden">
 			<Icon name="burger" class="h-8" />
 		</button>
-		<LanguageSelect class="max-lg:hidden ml-4" />
-		<DarkThemeToggle class="max-lg:hidden" />
+		<LanguageSelect class=" ml-4" />
+		<DarkThemeToggle class="" />
 	</div>
 	<div class="flex items-center justify-center">
 		<a
