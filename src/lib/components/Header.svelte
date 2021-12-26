@@ -19,7 +19,7 @@
 			href="/"
 			class="h-full px-4 text-xl md:text-3xl whitespace-nowrap hover:bg-primary-700 flex items-center"
 		>
-			<Icon name="search" class="hidden lg:block mr-3 h-10" />
+			<Icon name="search" class="hidden lg:block mr-2 h-10" />
 			Find My Doggo
 		</a>
 	</div>
