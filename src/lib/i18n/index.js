@@ -24,6 +24,17 @@ export const config = {
 			routes: ['/login'],
 			loader: async () => (await import('./fr/login.json')).default,
 		},
+		{
+			locale: 'djeun',
+			key: 'index',
+			loader: async () => (await import('./djeun/index.json')).default,
+		},
+		{
+			locale: 'djeun',
+			key: 'login',
+			routes: ['/login'],
+			loader: async () => (await import('./djeun/login.json')).default,
+		},
 	],
 };
 

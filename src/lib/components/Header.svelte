@@ -7,12 +7,12 @@
 <header
 	class="h-16 shadow-lg shadow-primary-400 dark:shadow-primary-900 bg-primary-600 text-gray-50 grid grid-cols-3"
 >
-	<div class="flex items-center">
+	<div class="flex items-center gap-4">
 		<button class="p-4 h-full hover:bg-primary-700 lg:hidden">
 			<Icon name="burger" class="h-8" />
 		</button>
-		<LanguageSelect class=" ml-4" />
-		<DarkThemeToggle class="" />
+		<LanguageSelect class="ml-4 max-lg:hidden" />
+		<DarkThemeToggle class="max-lg:hidden" />
 	</div>
 	<div class="flex items-center justify-center">
 		<a
