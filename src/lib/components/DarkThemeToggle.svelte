@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { darkMode } from '$lib/stores';
 	import { onMount } from 'svelte';
+	import { browser } from '$app/env';
+
+	$: if (browser) document.documentElement.classList[$darkMode ? 'add' : 'remove']('dark');
 
 	onMount(() => {
 		const startingDarkMode =
@@ -9,6 +12,20 @@
 		darkMode.set(startingDarkMode);
 	});
 </script>
+
+<!-- adds dark class (if needed) before body load to prevent flicker -->
+<svelte:head>
+	<script>
+		if (document) {
+			if (
+				localStorage.dark === 'true' ||
+				(!('dark' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark');
+			}
+		}
+	</script>
+</svelte:head>
 
 <button
 	class={$$props.class}
