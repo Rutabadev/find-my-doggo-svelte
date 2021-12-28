@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { locales, locale as usedLocale } from '$lib/i18n';
 	import Dropdown from '$lib/utils/Dropdown.svelte';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		usedLocale.set(localStorage.lang || navigator.language.substring(0, 2));
-	});
 
 	$: items = $locales
 		.filter((locale) => locale !== $usedLocale)

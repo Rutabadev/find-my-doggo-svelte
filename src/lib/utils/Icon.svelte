@@ -25,7 +25,7 @@
 	class={$$props.class}
 	fill={icon.type === 'solid' ? 'currentColor' : 'none'}
 	stroke={icon.type === 'outline' && 'currentColor'}
-	viewBox={`0 0 ${icon.type === 'solid' ? '20 20' : '24 24'}`}
+	viewBox="0 0 {icon.type === 'solid' ? '20 20' : '24 24'}"
 	xmlns="http://www.w3.org/2000/svg"
 >
 	{@html icon.svg}

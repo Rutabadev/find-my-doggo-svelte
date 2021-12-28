@@ -1,14 +1,13 @@
 <script lang="ts" context="module">
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
-	import { darkMode } from '$lib/stores';
-	import { loadTranslations, t, loading } from '$lib/i18n';
+	import { loadTranslations, t } from '$lib/i18n';
+	import { browser } from '$app/env';
 
-	export const load = async ({ page }) => {
-		const { path } = page;
+	export const load = async (context) => {
+		const locale = (browser && (localStorage.lang || navigator.language.substring(0, 2))) || 'en';
 
-		const locale = 'en'; // get from cookie or user session...
-		await loadTranslations(locale, path);
+		await loadTranslations(locale, context?.page?.path);
 
 		return {};
 	};
@@ -22,8 +21,5 @@
 	<main class="mx-auto p-6 flex-grow max-w-xl">
 		<slot />
 		<p>{$t('index.frik')}</p>
-		{#if $loading}
-			<p>loading</p>
-		{/if}
 	</main>
 </div>
