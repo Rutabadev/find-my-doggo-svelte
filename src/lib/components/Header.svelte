@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DarkThemeToggle from '$lib/components/DarkThemeToggle.svelte';
+	import Dropdown from '$lib/utils/Dropdown.svelte';
 	import Icon from '$lib/utils/icon.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
 </script>
