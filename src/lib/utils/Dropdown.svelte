@@ -1,19 +1,20 @@
 <script lang="ts">
 	import Icon from '$lib/utils/icon.svelte';
+	import { browser } from '$app/env';
 
 	export let items: { content: string; click?: () => any }[] = [
 		{ content: 'item 1' },
 		{ content: 'item 2' },
 		{ content: 'item 3' },
 	];
+
 	let dropdownElement: HTMLElement;
 	let buttonElement: HTMLElement;
 	let itemsElement: HTMLElement;
-	let menuShown = false;
 	let selectedItemElement: HTMLElement | undefined;
-
-	function toggleMenuShown() {
-		menuShown = !menuShown;
+	let menuShown = false;
+	$: if (browser) {
+		// run only client side to access window
 		if (menuShown) {
 			window.addEventListener('click', clickOutsideHandler);
 			window.addEventListener('keydown', keydownHandler);
@@ -25,7 +26,7 @@
 	}
 
 	function clickOutsideHandler({ target }: MouseEvent) {
-		if (!dropdownElement.contains(target as Node)) toggleMenuShown();
+		if (!dropdownElement.contains(target as Node)) menuShown = false;
 	}
 
 	function keydownHandler({ code }) {
@@ -48,7 +49,7 @@
 				selectedItemElement?.click();
 				break;
 			case 'Escape':
-				toggleMenuShown();
+				menuShown = false;
 				buttonElement.focus();
 				break;
 		}
@@ -66,7 +67,7 @@
 	<button
 		bind:this={buttonElement}
 		class={` flex items-center rounded-md py-2 px-4 border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-100 shadow`}
-		on:click={toggleMenuShown}
+		on:click={() => (menuShown = !menuShown)}
 	>
 		<slot>dropdown value</slot>
 		<Icon name="chevron-down" class="ml-2 -mr-1 h-5 w-5" />
@@ -82,7 +83,7 @@
 					href="/"
 					on:click={() => {
 						item.click?.();
-						toggleMenuShown();
+						menuShown = false;
 					}}
 					class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer"
 					>{item.content}</a
