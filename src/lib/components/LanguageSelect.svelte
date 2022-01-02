@@ -12,13 +12,13 @@
 	function changeLang(lang) {
 		usedLocale.set(lang);
 		document.cookie = `lang=${lang}; expires=Thu, 01 Jan 2037 00:00:00 UTC;`;
-		localStorage.lang = lang;
 	}
 
 	function resetLang(event) {
 		event.preventDefault();
 		const wantToReset = confirm('Do you want to reset the language to your system preference ?');
 		if (wantToReset) {
+			document.cookie = 'lang=deleted; expires=Thu, 01 Jan 1937 00:00:00 UTC;';
 			localStorage.removeItem('lang');
 			usedLocale.set(getLocaleFromNavigator().substring(0, 2));
 		}
