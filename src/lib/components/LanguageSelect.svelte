@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { locales, locale as usedLocale } from '$lib/i18n';
+	import { locales, locale as usedLocale, getLocaleFromNavigator } from 'svelte-i18n';
 	import Dropdown from '$lib/utils/Dropdown.svelte';
 
 	$: items = $locales
@@ -11,6 +11,7 @@
 
 	function changeLang(lang) {
 		usedLocale.set(lang);
+		document.cookie = `lang=${lang}; expires=Thu, 01 Jan 2037 00:00:00 UTC;`;
 		localStorage.lang = lang;
 	}
 
@@ -19,7 +20,7 @@
 		const wantToReset = confirm('Do you want to reset the language to your system preference ?');
 		if (wantToReset) {
 			localStorage.removeItem('lang');
-			usedLocale.set(navigator.language.substring(0, 2));
+			usedLocale.set(getLocaleFromNavigator().substring(0, 2));
 		}
 	}
 </script>

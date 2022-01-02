@@ -1,13 +1,16 @@
 <script lang="ts" context="module">
-	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
-	import { loadTranslations, t } from '$lib/i18n';
-	import { browser } from '$app/env';
+	import '$lib/i18n';
+	import { init, waitLocale, _ } from 'svelte-i18n';
+	import '../app.css';
 
 	export const load = async (context) => {
-		const locale = (browser && (localStorage.lang || navigator.language.substring(0, 2))) || 'en';
+		init({
+			fallbackLocale: 'en',
+			initialLocale: context.session.lang || 'en',
+		});
 
-		await loadTranslations(locale, context?.page?.path);
+		await waitLocale();
 
 		return {};
 	};
@@ -20,6 +23,6 @@
 
 	<main class="mx-auto p-6 flex-grow max-w-xl">
 		<slot />
-		<p>{$t('index.frik')}</p>
+		<p>{$_('page_title')}</p>
 	</main>
 </div>
