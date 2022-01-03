@@ -2,6 +2,7 @@
 	import { darkMode } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/env';
+	import Icon from '$lib/utils/icon.svelte';
 
 	$: if (browser) document.documentElement.classList[$darkMode ? 'add' : 'remove']('dark');
 
@@ -35,5 +36,11 @@
 		if (wantToReset) {
 			darkMode.reset();
 		}
-	}}>dark theme toggle</button
+	}}
 >
+	{#if $darkMode}
+		<Icon name="moon" class="h-5 w-5" />
+	{:else}
+		<Icon name="sun" class="h-5 w-5" />
+	{/if}
+</button>
