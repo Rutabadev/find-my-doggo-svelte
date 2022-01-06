@@ -17,7 +17,7 @@
 </script>
 
 <div
-	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50"
+	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50 transition-colors"
 >
 	<Header />
 
