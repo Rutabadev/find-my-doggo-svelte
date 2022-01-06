@@ -1,6 +1,5 @@
 <script lang="ts">
-	import DarkThemeToggle from '$lib/components/DarkThemeToggle.svelte';
-	import Dropdown from '$lib/utils/Dropdown.svelte';
+	import DarkModeToggle from '$lib/components/DarkModeToggle.svelte';
 	import Icon from '$lib/utils/icon.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
 </script>
@@ -13,7 +12,7 @@
 			<Icon name="burger" class="h-8" />
 		</button>
 		<LanguageSelect class="ml-4 max-lg:hidden" />
-		<DarkThemeToggle class="max-lg:hidden" />
+		<DarkModeToggle class="max-lg:hidden" />
 	</div>
 	<div class="flex items-center justify-center">
 		<a
