@@ -28,8 +28,8 @@
 	</script>
 </svelte:head>
 
-<button
-	class={$$props.class}
+<button 
+	class="h-full px-4 cursor-pointer {$$props.class}"
 	on:click={darkMode.toggle}
 	on:contextmenu|preventDefault={() => {
 		const wantToReset = confirm('Do you want to reset the theme to your system preference ?');
@@ -38,9 +38,15 @@
 		}
 	}}
 >
-	{#if $darkMode}
-		<Icon name="moon" class="h-5 w-5" />
-	{:else}
-		<Icon name="sun" class="h-5 w-5" />
-	{/if}
+	<div
+		class="w-10 h-6 ring-2 rounded-full ring-gray-300 dark:ring-gray-700 bg-gray-100 dark:bg-gray-800 shadow-inset flex items-center"
+	>
+		<div class="w-6 aspect-square rounded-full bg-white dark:bg-gray-600 shadow text-amber-400 grid place-content-center -rotate-180 {$darkMode && 'translate-x-4 -rotate-0'} transition-transform">
+			{#if $darkMode}
+				<Icon name="moon" class="h-6 w-6" />
+			{:else}
+				<Icon name="sun" class="h-6 w-6" />
+			{/if}
+		</div>
+	<div/>
 </button>
