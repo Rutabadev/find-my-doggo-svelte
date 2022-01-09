@@ -28,7 +28,7 @@
 	</script>
 </svelte:head>
 
-<button 
+<button
 	class="h-full px-4 cursor-pointer {$$props.class}"
 	on:click={darkMode.toggle}
 	on:contextmenu|preventDefault={() => {
@@ -39,10 +39,10 @@
 	}}
 >
 	<div
-		class="w-11 h-7 border-2 rounded-full border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 shadow-inset flex items-center"
+		class="w-11 h-7 rounded-full border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 shadow-inset flex items-center"
 	>
 		<!-- pusher -->
-		<div class="{$darkMode && 'flex-grow'} transition-[flex-grow]"></div>
+		<div class="{$darkMode && 'flex-grow'} transition-[flex-grow]" />
 		<div class="h-full aspect-square rounded-full bg-white dark:bg-gray-600 shadow text-amber-400 grid place-content-center -rotate-180 {$darkMode && 'rotate-0'} transition-transform">
 			{#if $darkMode}
 				<Icon name="moon" class="h-full w-full" />
@@ -50,5 +50,5 @@
 				<Icon name="sun" class="h-full w-full" />
 			{/if}
 		</div>
-	<div/>
+	</div>
 </button>
