@@ -23,6 +23,5 @@
 
 	<main class="mx-auto p-6 flex-grow max-w-xl">
 		<slot />
-		<p>{$_('page_title')}</p>
 	</main>
 </div>
