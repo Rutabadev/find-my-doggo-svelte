@@ -10,4 +10,8 @@
 	<title>{$_('index.title')}</title>
 </svelte:head>
 
-<p class="text-xl">{$_('index.welcome')} <span class="italic">{$_('index.spoiler')}</span></p>
+<div class="text-center">
+	<p class="text-xl">{$_('index.welcome')} <span class="italic">{$_('index.spoiler')}</span></p>
+	<p class="h-48">Place doggo here</p>
+	<button class="btn-secondary">{$_('index.find')}</button>
+</div>
