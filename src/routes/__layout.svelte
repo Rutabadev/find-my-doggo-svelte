@@ -17,11 +17,11 @@
 </script>
 
 <div
-	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50 transition-colors"
+	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 transition-colors"
 >
 	<Header />
 
-	<main class="mx-auto p-6 flex-grow max-w-xl">
+	<main class="mx-auto p-5 flex-grow max-w-xl">
 		<slot />
 	</main>
 </div>

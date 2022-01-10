@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Find My Doggo Svelte</title>
+	<title>{$_('index.title')}</title>
 </svelte:head>
 
-<p>{$_('index.welcome')}</p>
+<p class="text-xl">{$_('index.welcome')} <span class="italic">{$_('index.spoiler')}</span></p>
