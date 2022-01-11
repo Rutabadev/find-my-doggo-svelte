@@ -8,8 +8,8 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: colors.indigo,
-				secondary: colors.yellow,
+				brand: colors.indigo,
+				accent: colors.yellow,
 			},
 			screens: {
 				'max-lg': { max: screens.lg }
@@ -35,7 +35,7 @@ module.exports = {
 							'--tw-ring-color': theme(`ringColor.${value}.500`),
 						},
 						'.dark &': {
-							'@apply text-white focus:bg-primary-500': '',
+							'@apply text-white focus:bg-brand-500': '',
 							'--tw-ring-color': theme(`ringColor.${value}.400`),
 							'&:hover': {
 								backgroundColor: theme(`colors.${value}.500`),
@@ -45,6 +45,20 @@ module.exports = {
 							},
 						}
 					}),
+					'link': (value) => ({
+						'@apply rounded hover:underline': '',
+						color: theme(`colors.${value}.600`),
+						'&:focus-visible': {
+							'@apply outline-none ring-2': '',
+							'--tw-ring-color': theme(`ringColor.${value}.400`),
+						},
+						'.dark &': {
+							color: theme(`colors.${value}.500`),
+							'&:focus': {
+								'--tw-ring-color': theme(`ringColor.${value}.600`),
+							}
+						}
+					})
 				},
 				{ values: Object.keys(theme('colors')).reduce((acc, key) => ({ ...acc, [key]: key }), {}) }
 			)
