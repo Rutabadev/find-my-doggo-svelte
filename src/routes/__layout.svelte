@@ -21,7 +21,7 @@
 >
 	<Header />
 
-	<main class="mx-auto p-5 flex-grow max-w-xl">
+	<main class="mx-auto p-5 flex-grow max-w-3xl">
 		<slot />
 	</main>
 </div>

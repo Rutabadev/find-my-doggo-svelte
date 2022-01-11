@@ -24,7 +24,7 @@ module.exports = {
 			matchComponents(
 				{
 					'btn': (value) => ({
-						'@apply rounded px-6 py-1 text-gray-100 font-medium tracking-wide active:translate-y-px active:brightness-90': '',
+						'@apply rounded border-2 border-transparent px-6 py-1 text-gray-100 font-medium tracking-wide active:translate-y-px active:brightness-90': '',
 						backgroundColor: theme(`colors.${value}.600`),
 						'&:hover, &:focus-visible': {
 							backgroundColor: theme(`colors.${value}.700`),
