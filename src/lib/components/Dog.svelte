@@ -65,7 +65,7 @@
 
 <style lang="postcss">
 	@media (prefers-reduced-motion: no-preference) {
-		:root {
+		#dog {
 			--ear-animation-speed: 1s;
 			--ear-rotation: 6deg;
 		}
