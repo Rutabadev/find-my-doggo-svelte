@@ -24,23 +24,19 @@ module.exports = {
 			matchComponents(
 				{
 					'btn': (value) => ({
-						'@apply rounded px-6 py-1 text-gray-100 font-medium tracking-wide': '',
+						'@apply rounded px-6 py-1 text-gray-100 font-medium tracking-wide active:translate-y-px active:brightness-90': '',
 						backgroundColor: theme(`colors.${value}.600`),
-						'&:hover': {
-							backgroundColor: theme(`colors.${value}.800`),
+						'&:hover, &:focus-visible': {
+							backgroundColor: theme(`colors.${value}.700`),
 						},
-						'&:focus': {
+						'&:focus-visible': {
 							'@apply outline-none ring-2': '',
-							backgroundColor: theme(`colors.${value}.800`),
 							'--tw-ring-color': theme(`ringColor.${value}.500`),
 						},
 						'.dark &': {
-							'@apply text-white focus:bg-brand-500': '',
+							'@apply text-white': '',
 							'--tw-ring-color': theme(`ringColor.${value}.400`),
-							'&:hover': {
-								backgroundColor: theme(`colors.${value}.500`),
-							},
-							'&:focus': {
+							'&:hover, &:focus-visible': {
 								backgroundColor: theme(`colors.${value}.500`),
 							},
 						}
