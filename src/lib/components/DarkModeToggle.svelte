@@ -2,7 +2,7 @@
 	import { darkMode } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/env';
-	import Icon from '$lib/utils/icon.svelte';
+	import Icon from '$lib/utils/Icon.svelte';
 
 	$: if (browser) document.documentElement.classList[$darkMode ? 'add' : 'remove']('dark');
 
@@ -43,7 +43,10 @@
 	>
 		<!-- pusher -->
 		<div class="{$darkMode && 'flex-grow'} transition-[flex-grow]" />
-		<div class="h-full aspect-square rounded-full bg-white dark:bg-gray-600 shadow text-amber-400 grid place-content-center -rotate-180 {$darkMode && 'rotate-0'} transition-transform">
+		<div
+			class="h-full aspect-square rounded-full bg-white dark:bg-gray-600 shadow text-amber-400 grid place-content-center -rotate-180 {$darkMode &&
+				'rotate-0'} transition-transform"
+		>
 			{#if $darkMode}
 				<Icon name="moon" class="h-full w-full" />
 			{:else}

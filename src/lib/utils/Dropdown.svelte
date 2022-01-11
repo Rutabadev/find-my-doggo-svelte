@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Icon from '$lib/utils/icon.svelte';
 	import { browser } from '$app/env';
+	import Icon from './Icon.svelte';
 
 	export let items: { content: string; click?: () => any }[] = [
 		{ content: 'item 1' },

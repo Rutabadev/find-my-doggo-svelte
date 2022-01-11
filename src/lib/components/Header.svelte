@@ -1,6 +1,6 @@
 <script lang="ts">
 	import DarkModeToggle from '$lib/components/DarkModeToggle.svelte';
-	import Icon from '$lib/utils/icon.svelte';
+	import Icon from '$lib/utils/Icon.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
 </script>
 
