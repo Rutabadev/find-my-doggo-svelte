@@ -2,23 +2,31 @@
 	import { isSidebarOpened } from '$lib/stores';
 	import Icon from '$lib/utils/Icon.svelte';
 	import { tick } from 'svelte';
+	import { tweened } from 'svelte/motion';
+	import { backInOut } from 'svelte/easing';
 
 	let closeAnimationDone = true;
 	let closeSidebarButton;
 	let willSetCloseAnimationDone;
+	const closingAnimationDuration = 700;
+
+	const sidebarPosition = tweened(-100, {
+		duration: closingAnimationDuration,
+		easing: backInOut,
+	});
 
 	isSidebarOpened.subscribe(async (opened) => {
+		sidebarPosition.set(opened ? 0 : -100);
 		if (opened) {
 			clearTimeout(willSetCloseAnimationDone);
 			closeAnimationDone = false;
 			await tick();
 			closeSidebarButton.focus();
-			return;
+		} else {
+			willSetCloseAnimationDone = setTimeout(() => {
+				closeAnimationDone = true;
+			}, closingAnimationDuration);
 		}
-
-		willSetCloseAnimationDone = setTimeout(() => {
-			closeAnimationDone = true;
-		}, 300);
 	});
 </script>
 
@@ -27,25 +35,32 @@
 	<div
 		class="fixed inset-0 bg-black {$isSidebarOpened
 			? 'opacity-30'
-			: 'opacity-0 pointer-events-none'} motion-safe:transition-opacity"
+			: 'opacity-0 pointer-events-none'} motion-safe:transition-opacity motion-safe:duration-700"
 		on:click={() => {
 			isSidebarOpened.set(false);
 		}}
 	/>
 	<div
-		class="fixed inset-y-0 w-2/3 max-w-xs p-8 bg-brand-600 shadow-md 
-			   {$isSidebarOpened ? 'translate-x-0 visible' : '-translate-x-full'} 
-			   {!$isSidebarOpened && closeAnimationDone ? 'invisible' : 'visible'}
-			   motion-safe:transition-transform motion-safe:duration-300"
+		class="
+			fixed inset-y-0 w-2/3 max-w-xs p-8
+			{!$isSidebarOpened && closeAnimationDone ? 'invisible' : 'visible'}
+		"
+		style="transform: translateX({$sidebarPosition}%)"
 	>
-		<button
-			bind:this={closeSidebarButton}
-			class="absolute top-0 left-0 p-4 hover:bg-brand-700 focus:bg-brand-700"
-			on:click={() => {
-				isSidebarOpened.set(false);
-			}}
-		>
-			<Icon name="close" class="h-8 drop-shadow" />
-		</button>
+		<!-- add sidebar space to the left to prevent hole during animation -->
+		<div class="absolute inset-y-0 right-full translate-x-px w-32 bg-brand-600" />
+		<!-- border shadow to the right only -->
+		<div class="absolute inset-y-0 right-0 w-10 shadow-lg shadow-black" />
+		<div class="absolute inset-0 bg-brand-600 flex flex-col gap-8">
+			<button
+				bind:this={closeSidebarButton}
+				class="self-start p-4 hover:bg-brand-700 focus:bg-brand-700"
+				on:click={() => {
+					isSidebarOpened.set(false);
+				}}
+			>
+				<Icon name="close" class="h-8 drop-shadow" />
+			</button>
+		</div>
 	</div>
 </div>
