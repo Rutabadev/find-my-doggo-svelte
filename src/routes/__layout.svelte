@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import Header from '$lib/components/Header.svelte';
+	import Signature from '$lib/components/Signature.svelte';
 	import '$lib/i18n';
 	import { init, waitLocale, _ } from 'svelte-i18n';
 	import '../app.css';
@@ -21,7 +22,10 @@
 >
 	<Header />
 
-	<main class="mx-auto p-5 flex-grow max-w-3xl">
+	<main class="mx-auto p-5 max-w-4xl">
 		<slot />
 	</main>
+	<div class="flex-grow grid place-content-end">
+		<Signature class="p-8 w-52" />
+	</div>
 </div>
