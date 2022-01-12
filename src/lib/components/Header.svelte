@@ -3,6 +3,11 @@
 	import DarkModeToggle from '$lib/components/DarkModeToggle.svelte';
 	import Icon from '$lib/utils/Icon.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
+
+	let openSidebarButton;
+	isSidebarOpened.subscribe((opened) => {
+		!opened && openSidebarButton?.focus();
+	});
 </script>
 
 <header
@@ -10,7 +15,8 @@
 >
 	<div class="flex items-center gap-4">
 		<button
-			class="p-4 h-full hover:bg-brand-700 lg:hidden"
+			bind:this={openSidebarButton}
+			class="lg:hidden p-4 h-full hover:bg-brand-700 focus:bg-brand-700"
 			on:click={() => {
 				isSidebarOpened.set(true);
 			}}
