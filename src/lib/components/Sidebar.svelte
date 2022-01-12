@@ -1,21 +1,26 @@
 <script lang="ts">
+	import { browser } from '$app/env';
 	import { isSidebarOpened } from '$lib/stores';
 	import Icon from '$lib/utils/Icon.svelte';
 	import { tick } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { backInOut } from 'svelte/easing';
 
+	const sidebarAnimationDuration = 700;
+
 	let closeAnimationDone = true;
 	let closeSidebarButton;
 	let willSetCloseAnimationDone;
-	const closingAnimationDuration = 700;
 
-	const sidebarPosition = tweened(-100, {
-		duration: closingAnimationDuration,
-		easing: backInOut,
-	});
+	let sidebarPosition;
 
 	isSidebarOpened.subscribe(async (opened) => {
+		let prefersReduceMotion =
+			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		sidebarPosition = tweened(opened ? -100 : 0, {
+			duration: prefersReduceMotion ? 0 : sidebarAnimationDuration,
+			easing: backInOut,
+		});
 		sidebarPosition.set(opened ? 0 : -100);
 		if (opened) {
 			clearTimeout(willSetCloseAnimationDone);
@@ -25,7 +30,7 @@
 		} else {
 			willSetCloseAnimationDone = setTimeout(() => {
 				closeAnimationDone = true;
-			}, closingAnimationDuration);
+			}, sidebarAnimationDuration);
 		}
 	});
 </script>
