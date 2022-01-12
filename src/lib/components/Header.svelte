@@ -24,7 +24,7 @@
 			<Icon name="burger" class="h-8 drop-shadow" />
 		</button>
 		<LanguageSelect class="ml-4 max-lg:hidden" />
-		<DarkModeToggle class="max-lg:hidden" />
+		<DarkModeToggle class="max-lg:hidden h-full px-4" />
 	</div>
 	<div class="flex items-center justify-center">
 		<a

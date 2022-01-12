@@ -5,6 +5,7 @@
 	import { tick } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { backInOut } from 'svelte/easing';
+	import DarkModeToggle from './DarkModeToggle.svelte';
 
 	const sidebarAnimationDuration = 700;
 
@@ -57,15 +58,18 @@
 		<!-- border shadow to the right only -->
 		<div class="absolute inset-y-0 right-0 w-10 shadow-lg shadow-black" />
 		<div class="absolute inset-0 bg-brand-600 flex flex-col gap-8">
-			<button
-				bind:this={closeSidebarButton}
-				class="self-start p-4 hover:bg-brand-700 focus:bg-brand-700"
-				on:click={() => {
-					isSidebarOpened.set(false);
-				}}
-			>
-				<Icon name="close" class="h-8 drop-shadow" />
-			</button>
+			<div class="flex justify-between">
+				<button
+					bind:this={closeSidebarButton}
+					class="p-4 hover:bg-brand-700 focus:bg-brand-700"
+					on:click={() => {
+						isSidebarOpened.set(false);
+					}}
+				>
+					<Icon name="close" class="h-8 drop-shadow" />
+				</button>
+				<DarkModeToggle class="px-4" />
+			</div>
 		</div>
 	</div>
 </div>

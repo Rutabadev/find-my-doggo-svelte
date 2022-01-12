@@ -29,7 +29,7 @@
 </svelte:head>
 
 <button
-	class="h-full px-4 cursor-pointer {$$props.class}"
+	class="cursor-pointer {$$props.class}"
 	on:click={darkMode.toggle}
 	on:contextmenu|preventDefault={() => {
 		const wantToReset = confirm('Do you want to reset the theme to your system preference ?');
