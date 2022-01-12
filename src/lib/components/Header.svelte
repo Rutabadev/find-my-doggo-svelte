@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { isSidebarOpened } from '$lib/stores';
 	import DarkModeToggle from '$lib/components/DarkModeToggle.svelte';
 	import Icon from '$lib/utils/Icon.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
@@ -8,8 +9,13 @@
 	class="h-16 shadow-lg shadow-brand-400 dark:shadow-brand-900 bg-brand-600 text-gray-50 grid grid-cols-3"
 >
 	<div class="flex items-center gap-4">
-		<button class="p-4 h-full hover:bg-brand-700 lg:hidden">
-			<Icon name="burger" class="h-8" />
+		<button
+			class="p-4 h-full hover:bg-brand-700 lg:hidden"
+			on:click={() => {
+				isSidebarOpened.set(true);
+			}}
+		>
+			<Icon name="burger" class="h-8 drop-shadow" />
 		</button>
 		<LanguageSelect class="ml-4 max-lg:hidden" />
 		<DarkModeToggle class="max-lg:hidden" />
