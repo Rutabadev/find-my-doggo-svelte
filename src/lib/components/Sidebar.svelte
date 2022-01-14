@@ -3,11 +3,11 @@
 	import { isSidebarOpened } from '$lib/stores';
 	import Icon from '$lib/utils/Icon.svelte';
 	import { tick } from 'svelte';
-	import { tweened } from 'svelte/motion';
-	import { backInOut } from 'svelte/easing';
+	import { tweened, spring } from 'svelte/motion';
+	import { linear } from 'svelte/easing';
 	import DarkModeToggle from './DarkModeToggle.svelte';
 
-	const sidebarAnimationDuration = 700;
+	const sidebarAnimationDuration = 200;
 
 	let closeAnimationDone = true;
 	let closeSidebarButton;
@@ -16,13 +16,21 @@
 	let sidebarPosition;
 
 	isSidebarOpened.subscribe(async (opened) => {
-		let prefersReduceMotion =
+		const currentPosition = opened ? -100 : 0;
+		const prefersReduceMotion =
 			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		sidebarPosition = tweened(opened ? -100 : 0, {
+		const sidebarPositionTweened = tweened(currentPosition, {
 			duration: prefersReduceMotion ? 0 : sidebarAnimationDuration,
-			easing: backInOut,
+			easing: linear,
 		});
-		sidebarPosition.set(opened ? 0 : -100);
+		sidebarPosition = spring(currentPosition, {
+			damping: prefersReduceMotion ? 1 : 0.2,
+			stiffness: prefersReduceMotion ? 1 : 0.2,
+		});
+		sidebarPositionTweened.subscribe((value) => {
+			sidebarPosition.set(value);
+		});
+		sidebarPositionTweened.set(opened ? 0 : -100);
 		if (opened) {
 			clearTimeout(willSetCloseAnimationDone);
 			closeAnimationDone = false;
