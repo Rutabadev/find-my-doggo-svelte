@@ -69,7 +69,7 @@
 			<div class="flex justify-between">
 				<button
 					bind:this={closeSidebarButton}
-					class="p-4 hover:bg-brand-700 focus:bg-brand-700"
+					class="p-4 hover:bg-brand-700 focus:bg-brand-700 text-gray-50"
 					on:click={() => {
 						isSidebarOpened.set(false);
 					}}
