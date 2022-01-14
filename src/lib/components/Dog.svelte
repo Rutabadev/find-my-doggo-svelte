@@ -1,6 +1,6 @@
 <svg
 	id="dog"
-	class="group h-64 w-64 hover:-rotate-12 transition-transform {$$props.class}"
+	class="group h-64 w-64 hover:-rotate-12 motion-safe:transition-transform {$$props.class}"
 	on:contextmenu|preventDefault={() => {
 		alert(
 			[
