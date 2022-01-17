@@ -3,16 +3,37 @@
 	import { isSidebarOpened } from '$lib/stores';
 	import Icon from '$lib/utils/Icon.svelte';
 	import { tick } from 'svelte';
+	import { _ } from 'svelte-i18n';
 	import { backIn, linear } from 'svelte/easing';
 	import { spring, Spring, tweened, Tweened } from 'svelte/motion';
 	import DarkModeToggle from './DarkModeToggle.svelte';
+	import LanguageSelect from './LanguageSelect.svelte';
 
+	let user = { name: 'jean', roles: ['admin'] };
 	const closeSidebarAnimationDuration = 370;
 	let closeAnimationDone = true;
 	let closeSidebarButton: HTMLButtonElement;
 	let willSetCloseAnimationDone: NodeJS.Timeout;
 	let unsubscribeSidebarPositionTweened;
 	let sidebarPosition: Spring<number> | Tweened<number>;
+	const links = [
+		{
+			route: '/',
+			name: 'index.title',
+			always: true,
+		},
+		{
+			route: '/login',
+			name: 'login.title',
+			user: false,
+		},
+		{
+			route: '/admin',
+			name: 'admin.title',
+			user: true,
+			roles: ['admin'],
+		},
+	];
 
 	$: toggleSidebar($isSidebarOpened);
 
@@ -88,11 +109,11 @@
 		<div class="absolute inset-y-0 right-full translate-x-px w-32 bg-brand-600" />
 		<!-- border shadow to the right only -->
 		<div class="absolute inset-y-0 right-0 w-10 shadow-lg shadow-black" />
-		<div class="absolute inset-0 bg-brand-600 flex flex-col gap-8">
+		<div class="absolute inset-0 bg-brand-600 flex flex-col text-center text-gray-50">
 			<div class="flex justify-between">
 				<button
 					bind:this={closeSidebarButton}
-					class="p-4 hover:bg-brand-700 focus:bg-brand-700 text-gray-50"
+					class="p-4 hover:bg-brand-700 focus:bg-brand-700"
 					on:click={() => {
 						isSidebarOpened.set(false);
 					}}
@@ -100,6 +121,17 @@
 					<Icon name="close" class="h-8 drop-shadow" />
 				</button>
 				<DarkModeToggle class="px-4" />
+			</div>
+			{#each links as link}
+				{#if (link.user && (!link.roles ? true : user?.roles.some( (role) => link.roles.includes(role) ))) || (!user && !link.user) || link.always}
+					<a class="py-4 text-lg uppercase hover:bg-brand-700" href={link.route}>{$_(link.name)}</a>
+				{/if}
+			{/each}
+			{#if user}
+				<button class="py-4 text-lg uppercase hover:bg-brand-700">{$_('logout')}</button>
+			{/if}
+			<div class="py-4">
+				<LanguageSelect class="inline-block" />
 			</div>
 		</div>
 	</div>
