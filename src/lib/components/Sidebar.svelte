@@ -11,12 +11,13 @@
 	let closeAnimationDone = true;
 	let closeSidebarButton: HTMLButtonElement;
 	let willSetCloseAnimationDone: NodeJS.Timeout;
+	let unsubscribeSidebarPositionTweened;
 	let sidebarPosition: Spring<number> | Tweened<number>;
 
 	$: toggleSidebar($isSidebarOpened);
 
-	const createSpringSidebarPosition = (prefersReduceMotion) => {
-		let currentPosition = -100;
+	const createSpringSidebarPosition = (prefersReduceMotion: boolean) => {
+		const currentPosition = -100;
 		const sidebarPositionTweened = tweened(currentPosition, {
 			duration: prefersReduceMotion ? 0 : 200,
 			easing: linear,
@@ -25,7 +26,7 @@
 			damping: prefersReduceMotion ? 1 : 0.2,
 			stiffness: prefersReduceMotion ? 1 : 0.2,
 		});
-		sidebarPositionTweened.subscribe((value) => {
+		const unsubscribeSidebarPositionTweened = sidebarPositionTweened.subscribe((value) => {
 			sidebarPosition.set(value);
 		});
 
@@ -34,7 +35,8 @@
 		return sidebarPosition;
 	};
 
-	const createTweenedSidebarPosition = (prefersReduceMotion) => {
+	const createTweenedSidebarPosition = (prefersReduceMotion: boolean) => {
+		unsubscribeSidebarPositionTweened?.();
 		let currentPosition = 0;
 		const sidebarPosition = tweened(currentPosition, {
 			duration: prefersReduceMotion ? 0 : closeSidebarAnimationDuration,
@@ -50,16 +52,14 @@
 		const prefersReduceMotion =
 			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		sidebarPosition = opened
-			? createSpringSidebarPosition(prefersReduceMotion)
-			: createTweenedSidebarPosition(prefersReduceMotion);
-
 		if (opened) {
+			sidebarPosition = createSpringSidebarPosition(prefersReduceMotion);
 			clearTimeout(willSetCloseAnimationDone);
 			closeAnimationDone = false;
 			await tick();
 			closeSidebarButton.focus();
 		} else {
+			sidebarPosition = createTweenedSidebarPosition(prefersReduceMotion);
 			willSetCloseAnimationDone = setTimeout(() => {
 				closeAnimationDone = true;
 			}, closeSidebarAnimationDuration);
