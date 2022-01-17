@@ -3,34 +3,56 @@
 	import { isSidebarOpened } from '$lib/stores';
 	import Icon from '$lib/utils/Icon.svelte';
 	import { tick } from 'svelte';
-	import { tweened, spring } from 'svelte/motion';
-	import { linear } from 'svelte/easing';
+	import { tweened, spring, Spring, Tweened } from 'svelte/motion';
+	import { linear, backIn } from 'svelte/easing';
 	import DarkModeToggle from './DarkModeToggle.svelte';
 
-	const sidebarAnimationDuration = 200;
+	const sidebarAnimationDuration = 370;
 
 	let closeAnimationDone = true;
-	let closeSidebarButton;
-	let willSetCloseAnimationDone;
+	let closeSidebarButton: HTMLButtonElement;
+	let willSetCloseAnimationDone: NodeJS.Timeout;
 
-	let sidebarPosition;
+	let sidebarPosition: Spring<number> | Tweened<number>;
 
-	isSidebarOpened.subscribe(async (opened) => {
-		const currentPosition = opened ? -100 : 0;
-		const prefersReduceMotion =
-			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const createSpringSidebarPosition = ({ currentPosition, prefersReduceMotion }) => {
 		const sidebarPositionTweened = tweened(currentPosition, {
-			duration: prefersReduceMotion ? 0 : sidebarAnimationDuration,
+			duration: prefersReduceMotion ? 0 : 200,
 			easing: linear,
 		});
-		sidebarPosition = spring(currentPosition, {
+		const sidebarPosition = spring(currentPosition, {
 			damping: prefersReduceMotion ? 1 : 0.2,
 			stiffness: prefersReduceMotion ? 1 : 0.2,
 		});
 		sidebarPositionTweened.subscribe((value) => {
 			sidebarPosition.set(value);
 		});
-		sidebarPositionTweened.set(opened ? 0 : -100);
+
+		sidebarPositionTweened.set(0);
+
+		return sidebarPosition;
+	};
+
+	const createTweenedSidebarPosition = ({ currentPosition, prefersReduceMotion }) => {
+		const sidebarPosition = tweened(currentPosition, {
+			duration: prefersReduceMotion ? 0 : sidebarAnimationDuration,
+			easing: backIn,
+		});
+
+		sidebarPosition.set(-100);
+
+		return sidebarPosition;
+	};
+
+	isSidebarOpened.subscribe(async (opened) => {
+		const currentPosition = opened ? -100 : 0;
+		const prefersReduceMotion =
+			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		sidebarPosition = opened
+			? createSpringSidebarPosition({ currentPosition, prefersReduceMotion })
+			: createTweenedSidebarPosition({ currentPosition, prefersReduceMotion });
+
 		if (opened) {
 			clearTimeout(willSetCloseAnimationDone);
 			closeAnimationDone = false;
