@@ -26,7 +26,7 @@
 			damping: prefersReduceMotion ? 1 : 0.2,
 			stiffness: prefersReduceMotion ? 1 : 0.2,
 		});
-		const unsubscribeSidebarPositionTweened = sidebarPositionTweened.subscribe((value) => {
+		unsubscribeSidebarPositionTweened = sidebarPositionTweened.subscribe((value) => {
 			sidebarPosition.set(value);
 		});
 
