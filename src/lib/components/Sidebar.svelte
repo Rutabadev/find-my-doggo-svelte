@@ -3,19 +3,20 @@
 	import { isSidebarOpened } from '$lib/stores';
 	import Icon from '$lib/utils/Icon.svelte';
 	import { tick } from 'svelte';
-	import { tweened, spring, Spring, Tweened } from 'svelte/motion';
-	import { linear, backIn } from 'svelte/easing';
+	import { backIn, linear } from 'svelte/easing';
+	import { spring, Spring, tweened, Tweened } from 'svelte/motion';
 	import DarkModeToggle from './DarkModeToggle.svelte';
 
-	const sidebarAnimationDuration = 370;
-
+	const closeSidebarAnimationDuration = 370;
 	let closeAnimationDone = true;
 	let closeSidebarButton: HTMLButtonElement;
 	let willSetCloseAnimationDone: NodeJS.Timeout;
-
 	let sidebarPosition: Spring<number> | Tweened<number>;
 
-	const createSpringSidebarPosition = ({ currentPosition, prefersReduceMotion }) => {
+	$: toggleSidebar($isSidebarOpened);
+
+	const createSpringSidebarPosition = (prefersReduceMotion) => {
+		let currentPosition = -100;
 		const sidebarPositionTweened = tweened(currentPosition, {
 			duration: prefersReduceMotion ? 0 : 200,
 			easing: linear,
@@ -33,9 +34,10 @@
 		return sidebarPosition;
 	};
 
-	const createTweenedSidebarPosition = ({ currentPosition, prefersReduceMotion }) => {
+	const createTweenedSidebarPosition = (prefersReduceMotion) => {
+		let currentPosition = 0;
 		const sidebarPosition = tweened(currentPosition, {
-			duration: prefersReduceMotion ? 0 : sidebarAnimationDuration,
+			duration: prefersReduceMotion ? 0 : closeSidebarAnimationDuration,
 			easing: backIn,
 		});
 
@@ -44,14 +46,13 @@
 		return sidebarPosition;
 	};
 
-	isSidebarOpened.subscribe(async (opened) => {
-		const currentPosition = opened ? -100 : 0;
+	const toggleSidebar = async (opened: boolean) => {
 		const prefersReduceMotion =
 			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		sidebarPosition = opened
-			? createSpringSidebarPosition({ currentPosition, prefersReduceMotion })
-			: createTweenedSidebarPosition({ currentPosition, prefersReduceMotion });
+			? createSpringSidebarPosition(prefersReduceMotion)
+			: createTweenedSidebarPosition(prefersReduceMotion);
 
 		if (opened) {
 			clearTimeout(willSetCloseAnimationDone);
@@ -61,9 +62,9 @@
 		} else {
 			willSetCloseAnimationDone = setTimeout(() => {
 				closeAnimationDone = true;
-			}, sidebarAnimationDuration);
+			}, closeSidebarAnimationDuration);
 		}
-	});
+	};
 </script>
 
 <div class="isolate z-10">
