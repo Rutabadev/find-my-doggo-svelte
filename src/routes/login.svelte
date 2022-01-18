@@ -5,7 +5,7 @@
 	import { _ } from 'svelte-i18n';
 </script>
 
-<Form>
+<Form title="Login">
 	<FormInput name="email" label={$_('login.email')} />
 	<FormInput name="password" label={$_('login.password')} />
 	<button
@@ -20,14 +20,14 @@
 	</button>
 	<div slot="bottom">
 		<p>
-			<a href="/forgot-password" class="link-brand dark:link-accent">
+			<a href="/forgot-password" class="link-brand dark:dark-link-accent">
 				{$_('login.forgot')}
 			</a>
 		</p>
 
 		<p class="mt-4">
 			{$_('login.no_account')}
-			<a href="/create-account" class="link-brand dark:link-accent">
+			<a href="/create-account" class="link-brand dark:dark-link-accent">
 				{$_('login.signup')}
 			</a>
 		</p>

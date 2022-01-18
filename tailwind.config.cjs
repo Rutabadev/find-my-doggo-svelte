@@ -51,12 +51,14 @@ module.exports = {
 						'&:focus-visible': {
 							'@apply outline-none ring-2': '',
 							'--tw-ring-color': theme(`ringColor.${value}.400`),
-						},
-						'.dark &': {
-							color: theme(`colors.${value}.500`),
-							'&:focus': {
-								'--tw-ring-color': theme(`ringColor.${value}.600`),
-							}
+						}
+					}),
+					'dark-link': (value) => ({
+						'@apply rounded hover:underline': '',
+						color: theme(`colors.${value}.500`),
+						'&:focus-visible': {
+							'@apply outline-none ring-2': '',
+							'--tw-ring-color': theme(`ringColor.${value}.600`),
 						}
 					})
 				},

@@ -24,7 +24,7 @@
 	<Sidebar />
 
 	<Header />
-	<main class="mx-auto p-5 max-w-4xl">
+	<main class="mx-auto w-full max-w-4xl p-5">
 		<slot />
 	</main>
 	<div class="flex-grow grid place-content-end">
