@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { focusTrap } from '$lib/directives/focusTrap';
 	import Icon from './Icon.svelte';
 
 	export let items: { content: string; click?: () => any }[] = [
@@ -74,6 +75,7 @@
 	</button>
 	{#if menuShown}
 		<ul
+			use:focusTrap={menuShown}
 			bind:this={itemsElement}
 			transition:scaleY={{ duration: 100, start: 0.7 }}
 			class="origin-top absolute inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 mt-2 py-1 bg-white dark:bg-gray-700 shadow-lg"
