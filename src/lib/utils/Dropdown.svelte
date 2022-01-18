@@ -14,7 +14,7 @@
 	let selectedItemElement: HTMLElement | undefined;
 	let menuShown = false;
 	$: if (browser) {
-		// run only client side to access window
+		// Run only client side to access window
 		if (menuShown) {
 			window.addEventListener('click', clickOutsideHandler);
 			window.addEventListener('keydown', keydownHandler);
