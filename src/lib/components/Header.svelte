@@ -29,7 +29,7 @@
 	<div class="flex items-center justify-center">
 		<a
 			href="/"
-			class="h-full px-4 text-xl md:text-3xl whitespace-nowrap hover:bg-brand-700 flex items-center"
+			class="h-full px-4 text-xl sm:text-3xl whitespace-nowrap hover:bg-brand-700 flex items-center"
 		>
 			<Icon name="search" class="hidden lg:block mr-2 h-10" />
 			Find My Doggo
