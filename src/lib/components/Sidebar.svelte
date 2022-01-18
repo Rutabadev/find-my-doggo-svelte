@@ -8,6 +8,7 @@
 	import { spring, Spring, tweened, Tweened } from 'svelte/motion';
 	import DarkModeToggle from './DarkModeToggle.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
+	import { focusTrap } from '$lib/directives/focusTrap';
 
 	let user = { name: 'jean', roles: ['admin'] };
 	const closeSidebarAnimationDuration = 370;
@@ -113,7 +114,10 @@
 		<div class="absolute inset-y-0 right-full translate-x-px w-32 bg-brand-600" />
 		<!-- border shadow to the right only -->
 		<div class="absolute inset-y-0 right-0 w-10 shadow-lg shadow-black" />
-		<div class="absolute inset-0 bg-brand-600 flex flex-col text-center text-gray-50">
+		<div
+			use:focusTrap={$isSidebarOpened}
+			class="absolute inset-0 bg-brand-600 flex flex-col text-center text-gray-50"
+		>
 			<div class="flex justify-between">
 				<button
 					bind:this={closeSidebarButton}
