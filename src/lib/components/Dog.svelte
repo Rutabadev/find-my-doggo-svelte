@@ -22,14 +22,14 @@
 	/>
 	<path
 		id="left-ear"
-		class="group-hover:!animate-none"
+		class="origin-top-right [transform-box:fill-box] group-hover:!animate-none"
 		d="M41.4149 47L117.693 66.8757L6 131.036L41.4149 47Z"
 		fill="#803B14"
 		stroke="black"
 	/>
 	<path
 		id="right-ear"
-		class="group-hover:!animate-none"
+		class="origin-top-left [transform-box:fill-box] group-hover:!animate-none"
 		d="M259.278 47L183 66.8757L294.693 131.036L259.278 47Z"
 		fill="#803B14"
 		stroke="black"
@@ -51,7 +51,7 @@
 	/>
 	<path
 		id="tongue"
-		class="group-hover:hidden"
+		class="origin-top [transform-box:fill-box] group-hover:hidden"
 		d="M114.928 200.371C114.928 256.683 179.817 257.523 179.817 200.371H114.928Z"
 		fill="#FFA397"
 		stroke="black"
@@ -63,7 +63,7 @@
 	/>
 </svg>
 
-<style lang="postcss">
+<style>
 	@media (prefers-reduced-motion: no-preference) {
 		#dog {
 			--ear-animation-speed: 1s;
@@ -72,8 +72,6 @@
 
 		#left-ear {
 			animation: left-ear-rotate var(--ear-animation-speed) infinite alternate ease-in-out;
-			transform-origin: top right;
-			transform-box: fill-box;
 		}
 		@keyframes left-ear-rotate {
 			from {
@@ -86,8 +84,6 @@
 
 		#right-ear {
 			animation: right-ear-rotate var(--ear-animation-speed) infinite alternate ease-in-out;
-			transform-origin: top left;
-			transform-box: fill-box;
 		}
 		@keyframes right-ear-rotate {
 			from {
@@ -100,8 +96,6 @@
 
 		#tongue {
 			animation: breathe 0.2s infinite alternate ease-in-out;
-			transform-origin: top;
-			transform-box: fill-box;
 		}
 		@keyframes breathe {
 			from {
