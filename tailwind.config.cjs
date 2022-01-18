@@ -33,13 +33,17 @@ module.exports = {
 							'@apply outline-none ring-2': '',
 							'--tw-ring-color': theme(`ringColor.${value}.500`),
 						},
-						'.dark &': {
-							'@apply text-white': '',
+					}),
+					'dark-btn': (value) => ({
+						'@apply rounded border-2 border-transparent px-6 py-1 text-white font-medium tracking-wide active:translate-y-px active:brightness-90': '',
+						backgroundColor: theme(`colors.${value}.600`),
+						'&:hover, &:focus-visible': {
+							backgroundColor: theme(`colors.${value}.500`),
+						},
+						'&:focus-visible': {
+							'@apply outline-none ring-2': '',
 							'--tw-ring-color': theme(`ringColor.${value}.400`),
-							'&:hover, &:focus-visible': {
-								backgroundColor: theme(`colors.${value}.500`),
-							},
-						}
+						},
 					}),
 					'link': (value) => ({
 						'@apply rounded hover:underline': '',
