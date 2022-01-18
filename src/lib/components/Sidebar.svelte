@@ -29,7 +29,7 @@
 			user: false,
 		},
 		{
-			route: '/admin',
+			route: '/',
 			name: 'admin.title',
 			user: true,
 			roles: ['admin'],
