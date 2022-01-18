@@ -10,7 +10,7 @@
 	import LanguageSelect from './LanguageSelect.svelte';
 	import { focusTrap } from '$lib/directives/focusTrap';
 
-	let user = { name: 'jean', roles: ['admin'] };
+	let user: { name: string; roles: string[] } | undefined;
 	const closeSidebarAnimationDuration = 370;
 	let closeAnimationDone = true;
 	let closeSidebarButton: HTMLButtonElement;
@@ -132,7 +132,11 @@
 			</div>
 			{#each links as link}
 				{#if (link.user && (!link.roles ? true : user?.roles.some( (role) => link.roles.includes(role) ))) || (!user && !link.user) || link.always}
-					<a class="py-4 text-lg uppercase hover:bg-brand-700" href={link.route}>{$_(link.name)}</a>
+					<a
+						class="py-4 text-lg uppercase hover:bg-brand-700"
+						href={link.route}
+						on:click={() => isSidebarOpened.set(false)}>{$_(link.name)}</a
+					>
 				{/if}
 			{/each}
 			{#if user}

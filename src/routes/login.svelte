@@ -2,7 +2,10 @@
 	import FormInput from '$lib/components/Form/FormInput.svelte';
 
 	import Form from '$lib/components/Form/index.svelte';
+	import Icon from '$lib/utils/Icon.svelte';
 	import { _ } from 'svelte-i18n';
+
+	let isLoading = false;
 </script>
 
 <Form title="Login">
@@ -11,12 +14,13 @@
 	<button
 		aria-label="log in"
 		class="btn-brand dark:dark-btn-accent flex justify-center items-center uppercase tracking-wide"
-		>{$_('login.login')}
-		<!-- <span v-if="!isLoading">{{ $t('login.login') }}</span>
-	<template v-else>
-	  <IconSpinner class="h-5 w-5 mr-2"></IconSpinner>
-	  {{ $t('login.logging_in') }}
-	</template> -->
+	>
+		{#if !isLoading}
+			{$_('login.login')}
+		{:else}
+			<Icon name="spinner" class="h-5 w-5 mr-2 animate-spin" />
+			{$_('login.logging_in')}
+		{/if}
 	</button>
 	<div slot="bottom">
 		<p>
