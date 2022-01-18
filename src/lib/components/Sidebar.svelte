@@ -69,6 +69,8 @@
 		return sidebarPosition;
 	};
 
+	const handleEscape = ({ code }) => code === 'Escape' && isSidebarOpened.set(false);
+
 	const toggleSidebar = async (opened: boolean) => {
 		const prefersReduceMotion =
 			browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -79,7 +81,9 @@
 			closeAnimationDone = false;
 			await tick();
 			closeSidebarButton.focus();
+			browser && window.addEventListener('keydown', handleEscape);
 		} else {
+			browser && window.removeEventListener('keydown', handleEscape);
 			sidebarPosition = createTweenedSidebarPosition(prefersReduceMotion);
 			willSetCloseAnimationDone = setTimeout(() => {
 				closeAnimationDone = true;
