@@ -38,8 +38,9 @@
 
 	$: toggleSidebar($isSidebarOpened);
 
+	$: currentPosition = $sidebarPosition;
+
 	const createSpringSidebarPosition = (prefersReduceMotion: boolean) => {
-		const currentPosition = -100;
 		const sidebarPositionTweened = tweened(currentPosition, {
 			duration: prefersReduceMotion ? 0 : 200,
 			easing: linear,
@@ -59,7 +60,6 @@
 
 	const createTweenedSidebarPosition = (prefersReduceMotion: boolean) => {
 		unsubscribeSidebarPositionTweened?.();
-		let currentPosition = 0;
 		const sidebarPosition = tweened(currentPosition, {
 			duration: prefersReduceMotion ? 0 : closeSidebarAnimationDuration,
 			easing: backIn,
