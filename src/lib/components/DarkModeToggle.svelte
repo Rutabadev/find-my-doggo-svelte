@@ -42,7 +42,7 @@
 		class="w-11 h-7 rounded-full border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 shadow-inset flex items-center"
 	>
 		<!-- pusher -->
-		<div class="{$darkMode && 'flex-grow'} transition-[flex-grow]" />
+		<div class="{$darkMode && 'grow'} transition-[grow]" />
 		<div
 			class="h-full aspect-square rounded-full bg-white dark:bg-gray-600 shadow text-amber-400 grid place-content-center -rotate-180 {$darkMode &&
 				'rotate-0'} transition-transform"

@@ -27,7 +27,7 @@
 	<main class="mx-auto w-full max-w-4xl p-5">
 		<slot />
 	</main>
-	<div class="flex-grow grid place-content-end">
+	<div class="grow grid place-content-end">
 		<Signature class="p-8 w-52" />
 	</div>
 </div>
