@@ -25,19 +25,15 @@
 		}
 	}
 
-	function selectNextElement() {
-		!selectedItemElement
-			? (selectedItemElement = itemsElement.firstElementChild as HTMLElement)
-			: (selectedItemElement = (selectedItemElement.nextElementSibling ||
-					itemsElement.firstElementChild) as HTMLElement);
-		selectedItemElement.focus();
-	}
+	function selectElement(position: 'next' | 'previous') {
+		const [firstItem, nextItem] =
+			position === 'next'
+				? ['firstElementChild', 'nextElementSibling']
+				: ['lastElementChild', 'previousElementSibling'];
+		selectedItemElement = !selectedItemElement
+			? itemsElement[firstItem]
+			: selectedItemElement[nextItem] || itemsElement[firstItem];
 
-	function selectPreviousElement() {
-		!selectedItemElement
-			? (selectedItemElement = itemsElement.lastElementChild as HTMLElement)
-			: (selectedItemElement = (selectedItemElement.previousElementSibling ||
-					itemsElement.lastElementChild) as HTMLElement);
 		selectedItemElement.focus();
 	}
 
@@ -49,10 +45,10 @@
 		const { code, shiftKey } = e;
 		switch (code) {
 			case 'ArrowDown':
-				selectNextElement();
+				selectElement('next');
 				break;
 			case 'ArrowUp':
-				selectPreviousElement();
+				selectElement('previous');
 				break;
 			case 'Space':
 				selectedItemElement?.click();
@@ -63,7 +59,7 @@
 				break;
 			case 'Tab':
 				e.preventDefault();
-				shiftKey ? selectPreviousElement() : selectNextElement();
+				selectElement(shiftKey ? 'previous' : 'next');
 		}
 	}
 
