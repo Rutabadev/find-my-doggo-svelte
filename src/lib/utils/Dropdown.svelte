@@ -64,7 +64,7 @@
 	}
 </script>
 
-<div class="relative {$$props.class}" bind:this={dropdownElement} on:contextmenu>
+<div class="relative inline-block {$$props.class}" bind:this={dropdownElement} on:contextmenu>
 	<button
 		bind:this={buttonElement}
 		class="flex items-center rounded-md py-2 px-4 border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-100 shadow"
