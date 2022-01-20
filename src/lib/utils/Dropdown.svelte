@@ -81,15 +81,14 @@
 			class="origin-top absolute inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 mt-2 py-1 bg-white dark:bg-gray-700 shadow-lg"
 		>
 			{#each items as item}
-				<a
-					href="/"
+				<button
 					on:click={() => {
 						item.click?.();
 						menuShown = false;
 					}}
-					class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer"
-					>{item.content}</a
-				>
+					class="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer"
+					>{item.content}
+				</button>
 			{/each}
 		</ul>
 	{/if}
