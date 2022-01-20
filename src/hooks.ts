@@ -1,6 +1,6 @@
-import cookie from 'cookie';
 import { v4 as uuid } from '@lukeed/uuid';
-import type { GetSession, Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
+import cookie from 'cookie';
 
 export const handle: Handle = async ({ request, resolve }) => {
 	const cookies = cookie.parse(request.headers.cookie || '');
@@ -23,11 +23,4 @@ export const handle: Handle = async ({ request, resolve }) => {
 	}
 
 	return response;
-};
-
-export const getSession: GetSession = async (request) => {
-	const cookies = cookie.parse(request.headers.cookie || '');
-	return {
-		lang: cookies.lang || request.headers?.['accept-language']?.substring(0, 2),
-	};
 };

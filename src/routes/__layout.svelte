@@ -4,7 +4,10 @@
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import Signature from '$lib/components/Signature.svelte';
 	import '$lib/i18n';
-	import { init, waitLocale, _ } from 'svelte-i18n';
+	import { init, locale, waitLocale, _ } from 'svelte-i18n';
+	import { browser } from '$app/env';
+
+	let langLoading = true;
 
 	export const load = async (context) => {
 		init({
@@ -12,14 +15,19 @@
 			initialLocale: context.session.lang || 'en',
 		});
 
-		await waitLocale();
+		if (browser) {
+			await waitLocale();
+			localStorage.lang && locale.set(localStorage.lang);
+			langLoading = false;
+		}
 
 		return {};
 	};
 </script>
 
 <div
-	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 transition-colors"
+	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 transition-colors {langLoading &&
+		'blur-sm'}"
 >
 	<Sidebar />
 
