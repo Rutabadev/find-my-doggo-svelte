@@ -15,8 +15,9 @@
 			initialLocale: context.session.lang || 'en',
 		});
 
+		await waitLocale();
+
 		if (browser) {
-			await waitLocale();
 			localStorage.lang && locale.set(localStorage.lang);
 			langLoading = false;
 		}
