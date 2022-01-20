@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-	import { focusTrap } from '$lib/directives/focusTrap';
 	import Icon from './Icon.svelte';
 
 	export let items: { content: string; click?: () => any }[] = [
@@ -26,25 +25,34 @@
 		}
 	}
 
+	function selectNextElement() {
+		!selectedItemElement
+			? (selectedItemElement = itemsElement.firstElementChild as HTMLElement)
+			: (selectedItemElement = (selectedItemElement.nextElementSibling ||
+					itemsElement.firstElementChild) as HTMLElement);
+		selectedItemElement.focus();
+	}
+
+	function selectPreviousElement() {
+		!selectedItemElement
+			? (selectedItemElement = itemsElement.lastElementChild as HTMLElement)
+			: (selectedItemElement = (selectedItemElement.previousElementSibling ||
+					itemsElement.lastElementChild) as HTMLElement);
+		selectedItemElement.focus();
+	}
+
 	function clickOutsideHandler({ target }: MouseEvent) {
 		if (!dropdownElement.contains(target as Node)) menuShown = false;
 	}
 
-	function keydownHandler({ code }) {
+	function keydownHandler(e) {
+		const { code, shiftKey } = e;
 		switch (code) {
 			case 'ArrowDown':
-				!selectedItemElement
-					? (selectedItemElement = itemsElement.firstElementChild as HTMLElement)
-					: (selectedItemElement =
-							(selectedItemElement.nextElementSibling as HTMLElement) || selectedItemElement);
-				selectedItemElement.focus();
+				selectNextElement();
 				break;
 			case 'ArrowUp':
-				!selectedItemElement
-					? (selectedItemElement = itemsElement.lastElementChild as HTMLElement)
-					: (selectedItemElement =
-							(selectedItemElement.previousElementSibling as HTMLElement) || selectedItemElement);
-				selectedItemElement.focus();
+				selectPreviousElement();
 				break;
 			case 'Space':
 				selectedItemElement?.click();
@@ -53,6 +61,9 @@
 				menuShown = false;
 				buttonElement.focus();
 				break;
+			case 'Tab':
+				e.preventDefault();
+				shiftKey ? selectPreviousElement() : selectNextElement();
 		}
 	}
 
@@ -75,7 +86,6 @@
 	</button>
 	{#if menuShown}
 		<ul
-			use:focusTrap={menuShown}
 			bind:this={itemsElement}
 			transition:scaleY={{ duration: 100, start: 0.7 }}
 			class="origin-top absolute inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 mt-2 py-1 bg-white dark:bg-gray-700 shadow-lg"
