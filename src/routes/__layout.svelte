@@ -34,7 +34,7 @@
 	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 transition-colors"
 >
 	{#if langLoading}
-		<div transition:fade class="z-10 fixed inset-0 backdrop-blur-sm" />
+		<div transition:fade={{ duration: 700 }} class="z-10 fixed inset-0 backdrop-blur-sm" />
 	{/if}
 
 	<Sidebar />
