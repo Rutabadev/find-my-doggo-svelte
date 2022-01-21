@@ -35,6 +35,7 @@
 	"dependencies": {
 		"@lukeed/uuid": "^2.0.0",
 		"cookie": "^0.4.1",
+		"lodash-es": "^4.17.21",
 		"svelte-i18n": "^3.3.13"
 	}
 }

@@ -1,3 +1,8 @@
+<script lang="ts">
+	import { debounce } from 'lodash-es';
+	let isHovered = false;
+</script>
+
 <svg
 	id="dog"
 	class="h-64 w-64 {$$props.class}"
@@ -15,7 +20,11 @@
 	stroke="black"
 	stroke-width="3"
 >
-	<g class="group hover:-rotate-12 origin-center motion-safe:transition-transform">
+	<g
+		on:mouseenter={() => (isHovered = true)}
+		on:mouseleave={debounce(() => (isHovered = false), 200)}
+		class="{isHovered && '-rotate-12'} origin-center motion-safe:transition-transform"
+	>
 		<path
 			id="head"
 			d="M68.1235 82.9264L149.5 55.7012L230.877 82.9264L216.615 212.77L149.5 256.749L82.3854 212.77L68.1235 82.9264Z"
@@ -23,14 +32,14 @@
 		/>
 		<path
 			id="left-ear"
-			class="origin-top-right [transform-box:fill-box] group-hover:!animate-none"
+			class="origin-top-right [transform-box:fill-box] {isHovered && '!animate-none'}"
 			d="M41.4149 47L117.693 66.8757L6 131.036L41.4149 47Z"
 			fill="#803B14"
 			stroke="black"
 		/>
 		<path
 			id="right-ear"
-			class="origin-top-left [transform-box:fill-box] group-hover:!animate-none"
+			class="origin-top-left [transform-box:fill-box] {isHovered && '!animate-none'}"
 			d="M259.278 47L183 66.8757L294.693 131.036L259.278 47Z"
 			fill="#803B14"
 			stroke="black"
@@ -45,14 +54,14 @@
 		/>
 		<path
 			id="mouth"
-			class="group-hover:[clip-path:_polygon(0_0,_100%_0,_100%_10%,_0_10%)]"
+			class={isHovered && '[clip-path:_polygon(0_0,_100%_0,_100%_10%,_0_10%)]'}
 			d="M150.016 228.028L105.5 193.988H188L150.016 228.028Z"
 			fill="black"
 			stroke="black"
 		/>
 		<path
 			id="tongue"
-			class="origin-top [transform-box:fill-box] group-hover:hidden"
+			class="origin-top [transform-box:fill-box] {isHovered && 'hidden'}"
 			d="M114.928 200.371C114.928 256.683 179.817 257.523 179.817 200.371H114.928Z"
 			fill="#FFA397"
 			stroke="black"
