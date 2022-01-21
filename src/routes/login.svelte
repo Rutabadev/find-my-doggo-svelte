@@ -5,15 +5,26 @@
 	import Icon from '$lib/utils/Icon.svelte';
 	import { _ } from 'svelte-i18n';
 
+	let loginInfo = {
+		email: '',
+		password: '',
+	};
+
 	let isLoading = false;
 </script>
 
 <Form title="Login">
-	<FormInput name="email" label={$_('login.email')} />
-	<FormInput name="password" label={$_('login.password')} />
+	<FormInput name="email" label={$_('login.email')} bind:value={loginInfo.email} />
+	<FormInput
+		name="password"
+		label={$_('login.password')}
+		type="password"
+		bind:value={loginInfo.password}
+	/>
 	<button
 		aria-label="log in"
 		class="btn-brand dark:dark-btn-accent flex justify-center items-center uppercase tracking-wide"
+		on:click|preventDefault={() => console.log({ loginInfo })}
 	>
 		{#if !isLoading}
 			{$_('login.login')}
