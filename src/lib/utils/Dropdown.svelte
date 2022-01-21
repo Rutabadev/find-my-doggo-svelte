@@ -3,10 +3,10 @@
 	import { _ } from 'svelte-i18n';
 	import Icon from './Icon.svelte';
 
-	export let items: { content: string; click?: () => any }[] = [
-		{ content: 'item 1' },
-		{ content: 'item 2' },
-		{ content: 'item 3' },
+	export let items: ({ content: string; click?: () => any } | string)[] = [
+		'item 1',
+		'item 2',
+		'item 3',
 	];
 
 	let dropdownElement: HTMLElement;
@@ -72,7 +72,11 @@
 				selectElement(shiftKey ? 'previous' : 'next');
 				break;
 			default:
-				let itemFound = searchItem(
+				if (!key.match(/^[A-z]$/)) {
+					return;
+				}
+
+				const itemFound = searchItem(
 					key,
 					Array.from(itemsElement.children).indexOf(selectedItemElement) + 1
 				);
@@ -119,11 +123,11 @@
 			{#each items as item}
 				<button
 					on:click={() => {
-						item.click?.();
+						typeof item !== 'string' && item.click?.();
 						menuShown = false;
 					}}
 					class="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer outline-none"
-					>{item.content}
+					>{typeof item === 'string' ? item : item.content}
 				</button>
 			{/each}
 		</ul>
