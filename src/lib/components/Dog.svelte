@@ -54,7 +54,7 @@
 		/>
 		<path
 			id="mouth"
-			class={isHovered && '[clip-path:_polygon(0_0,_100%_0,_100%_10%,_0_10%)]'}
+			class={isHovered && '[clip-path:_polygon(0_0,100%_0,100%_10%,0_10%)]'}
 			d="M150.016 228.028L105.5 193.988H188L150.016 228.028Z"
 			fill="black"
 			stroke="black"
