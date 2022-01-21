@@ -12,7 +12,7 @@
 	/>
 	<label
 		for={name}
-		class="absolute inset-0 text-gray-400 pointer-events-none -translate-y-7 scale-90 origin-left peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:p-2.5 peer-focus:-translate-y-7 peer-focus:scale-90 peer-focus:p-0 transition-all duration-200"
+		class="absolute inset-0 text-gray-400 truncate pointer-events-none -translate-y-7 scale-90 origin-left peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:p-2.5 peer-focus:-translate-y-7 peer-focus:scale-90 peer-focus:p-0 transition-all duration-200"
 		>{label}
 		<!-- <span class="text-red-500 dark:text-red-400">*</span> -->
 	</label>

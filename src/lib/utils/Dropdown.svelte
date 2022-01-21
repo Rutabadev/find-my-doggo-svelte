@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-	import { focusTrap } from '$lib/directives/focusTrap';
 	import Icon from './Icon.svelte';
 
 	export let items: { content: string; click?: () => any }[] = [
@@ -26,25 +25,30 @@
 		}
 	}
 
+	function selectElement(position: 'next' | 'previous') {
+		const [firstItem, nextItem] =
+			position === 'next'
+				? ['firstElementChild', 'nextElementSibling']
+				: ['lastElementChild', 'previousElementSibling'];
+		selectedItemElement = !selectedItemElement
+			? itemsElement[firstItem]
+			: selectedItemElement[nextItem] || itemsElement[firstItem];
+
+		selectedItemElement.focus();
+	}
+
 	function clickOutsideHandler({ target }: MouseEvent) {
 		if (!dropdownElement.contains(target as Node)) menuShown = false;
 	}
 
-	function keydownHandler({ code }) {
+	function keydownHandler(e) {
+		const { code, shiftKey } = e;
 		switch (code) {
 			case 'ArrowDown':
-				!selectedItemElement
-					? (selectedItemElement = itemsElement.firstElementChild as HTMLElement)
-					: (selectedItemElement =
-							(selectedItemElement.nextElementSibling as HTMLElement) || selectedItemElement);
-				selectedItemElement.focus();
+				selectElement('next');
 				break;
 			case 'ArrowUp':
-				!selectedItemElement
-					? (selectedItemElement = itemsElement.lastElementChild as HTMLElement)
-					: (selectedItemElement =
-							(selectedItemElement.previousElementSibling as HTMLElement) || selectedItemElement);
-				selectedItemElement.focus();
+				selectElement('previous');
 				break;
 			case 'Space':
 				selectedItemElement?.click();
@@ -53,6 +57,9 @@
 				menuShown = false;
 				buttonElement.focus();
 				break;
+			case 'Tab':
+				e.preventDefault();
+				selectElement(shiftKey ? 'previous' : 'next');
 		}
 	}
 
@@ -64,7 +71,7 @@
 	}
 </script>
 
-<div class="relative {$$props.class}" bind:this={dropdownElement} on:contextmenu>
+<div class="relative inline-block {$$props.class}" bind:this={dropdownElement} on:contextmenu>
 	<button
 		bind:this={buttonElement}
 		class="flex items-center rounded-md py-2 px-4 border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-100 shadow"
@@ -75,21 +82,19 @@
 	</button>
 	{#if menuShown}
 		<ul
-			use:focusTrap={menuShown}
 			bind:this={itemsElement}
 			transition:scaleY={{ duration: 100, start: 0.7 }}
 			class="origin-top absolute inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 mt-2 py-1 bg-white dark:bg-gray-700 shadow-lg"
 		>
 			{#each items as item}
-				<a
-					href="/"
+				<button
 					on:click={() => {
 						item.click?.();
 						menuShown = false;
 					}}
-					class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer"
-					>{item.content}</a
-				>
+					class="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer outline-none"
+					>{item.content}
+				</button>
 			{/each}
 		</ul>
 	{/if}

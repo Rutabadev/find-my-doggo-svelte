@@ -128,12 +128,12 @@
 				>
 					<Icon name="close" class="h-8 drop-shadow" />
 				</button>
-				<DarkModeToggle class="px-4" />
+				<DarkModeToggle class="px-4 focus:bg-brand-700" />
 			</div>
 			{#each links as link}
 				{#if (link.user && (!link.roles ? true : user?.roles.some( (role) => link.roles.includes(role) ))) || (!user && !link.user) || link.always}
 					<a
-						class="py-4 text-lg uppercase hover:bg-brand-700"
+						class="py-4 text-lg uppercase hover:bg-brand-700 focus:bg-brand-700"
 						href={link.route}
 						on:click={() => isSidebarOpened.set(false)}>{$_(link.name)}</a
 					>
