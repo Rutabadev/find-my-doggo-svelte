@@ -16,8 +16,8 @@ const config = {
 		vite: {
 			define: {
 				'process.env': {
+					...process.env,
 					startedAt: Date.now(),
-					...process.env
 				},
 			},
 		},
