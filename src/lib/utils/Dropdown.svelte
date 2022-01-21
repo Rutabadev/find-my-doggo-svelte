@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { _ } from 'svelte-i18n';
 	import Icon from './Icon.svelte';
 
 	export let items: { content: string; click?: () => any }[] = [
@@ -40,8 +41,18 @@
 		if (!dropdownElement.contains(target as Node)) menuShown = false;
 	}
 
+	function searchItem(key: string, startSearchAt = 0) {
+		const itemsList = Array.from(itemsElement.children);
+		return (itemsList
+			.slice(startSearchAt, itemsList.length)
+			.find(({ textContent }) => textContent.startsWith(key)) ||
+			itemsList
+				.slice(0, itemsList.length)
+				.find(({ textContent }) => textContent.startsWith(key))) as HTMLElement;
+	}
+
 	function keydownHandler(e) {
-		const { code, shiftKey } = e;
+		const { code, shiftKey, key } = e;
 		switch (code) {
 			case 'ArrowDown':
 				selectElement('next');
@@ -59,6 +70,19 @@
 			case 'Tab':
 				e.preventDefault();
 				selectElement(shiftKey ? 'previous' : 'next');
+				break;
+			default:
+				let itemFound = searchItem(
+					key,
+					Array.from(itemsElement.children).indexOf(selectedItemElement) + 1
+				);
+
+				if (!itemFound) {
+					return;
+				}
+
+				selectedItemElement = itemFound;
+				selectedItemElement.focus();
 		}
 	}
 

@@ -1,11 +1,13 @@
 <script lang="ts" context="module">
-	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
 	import Signature from '$lib/components/Signature.svelte';
 	import '$lib/i18n';
-	import { init, locale, waitLocale, _ } from 'svelte-i18n';
+	import Dropdown from '$lib/utils/Dropdown.svelte';
+	import { onMount } from 'svelte';
+	import { init, locale, waitLocale } from 'svelte-i18n';
 	import { fade } from 'svelte/transition';
+	import '../app.css';
 
 	export const load = async (context) => {
 		init({
@@ -20,8 +22,6 @@
 </script>
 
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	let langLoading = true;
 
 	onMount(() => {
