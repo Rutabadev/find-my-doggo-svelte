@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { scaleFrom } from '$lib/transitions/scaleFrom';
 	import { _ } from 'svelte-i18n';
 	import Icon from './Icon.svelte';
 
@@ -84,13 +85,6 @@
 			.slice(startSearchAt, itemsList.length)
 			.find(({ textContent }) => textContent.startsWith(key)) as HTMLElement;
 	}
-
-	function scaleY(node, { duration = 150, start = 0 }) {
-		return {
-			duration,
-			css: (t: number) => `opacity: ${t}; transform: scaleY(${start + (1 - start) * t})`,
-		};
-	}
 </script>
 
 <button
@@ -112,8 +106,8 @@
 	{#if menuShown}
 		<ul
 			bind:this={itemsElement}
-			transition:scaleY={{ duration: 100, start: 0.7 }}
-			class="origin-top absolute top-full mt-2 inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 py-1 bg-white dark:bg-gray-700 shadow-lg"
+			transition:scaleFrom={{ from: 'top', duration: 100, start: 0.7 }}
+			class="absolute top-full mt-2 inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 py-1 bg-white dark:bg-gray-700 shadow-lg"
 		>
 			{#each items as item}
 				<button
