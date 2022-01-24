@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { isSidebarOpened } from '$lib/stores';
+	import { isSidebarOpened, user, api } from '$lib/stores';
 	import DarkModeToggle from '$lib/components/DarkModeToggle.svelte';
 	import Icon from '$lib/utils/Icon.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
+	import { _ } from 'svelte-i18n';
 
 	let openSidebarButton;
 	isSidebarOpened.subscribe((opened) => {
@@ -34,5 +35,16 @@
 			<Icon name="search" class="hidden lg:block mr-2 h-10" />
 			Find My Doggo
 		</a>
+	</div>
+	<div class="flex justify-end">
+		{#if !$user}
+			<a href="/login" class="hidden lg:flex px-4 hover:bg-brand-700 items-center uppercase"
+				>{$_('login.title')}</a
+			>
+		{:else}
+			<button class="px-4 max-lg:hidden hover:bg-brand-700" on:click={() => api.logout()}
+				>test</button
+			>
+		{/if}
 	</div>
 </header>
