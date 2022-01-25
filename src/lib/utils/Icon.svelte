@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { svg_element } from 'svelte/internal';
-
 	const icons = [
 		{
 			name: 'burger',
