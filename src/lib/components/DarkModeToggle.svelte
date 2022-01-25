@@ -39,12 +39,12 @@
 	}}
 >
 	<div
-		class="w-11 h-7 rounded-full border-2 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 shadow-inset flex items-center"
+		class="shadow-inset flex h-7 w-11 items-center rounded-full border-2 border-gray-300 bg-gray-100 dark:border-gray-700 dark:bg-gray-800"
 	>
 		<!-- pusher -->
 		<div class="{$darkMode && 'grow'} transition-[grow]" />
 		<div
-			class="h-full aspect-square rounded-full bg-white dark:bg-gray-600 shadow text-amber-400 grid place-content-center -rotate-180 {$darkMode &&
+			class="grid aspect-square h-full -rotate-180 place-content-center rounded-full bg-white text-amber-400 shadow dark:bg-gray-600 {$darkMode &&
 				'rotate-0'} transition-transform"
 		>
 			{#if $darkMode}

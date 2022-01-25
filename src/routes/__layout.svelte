@@ -31,10 +31,10 @@
 </script>
 
 <div
-	class="min-h-screen flex flex-col bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 transition-colors"
+	class="flex min-h-screen flex-col bg-gray-100 text-gray-900 transition-colors dark:bg-gray-800 dark:text-gray-300"
 >
 	{#if langLoading}
-		<div transition:fade={{ duration: 700 }} class="z-10 fixed inset-0 backdrop-blur-sm" />
+		<div transition:fade={{ duration: 700 }} class="fixed inset-0 z-10 backdrop-blur-sm" />
 	{/if}
 
 	<Sidebar />
@@ -43,7 +43,7 @@
 	<main class="mx-auto w-full max-w-4xl p-5">
 		<slot />
 	</main>
-	<div class="grow grid place-content-end">
-		<Signature class="p-8 w-52" />
+	<div class="grid grow place-content-end">
+		<Signature class="w-52 p-8" />
 	</div>
 </div>

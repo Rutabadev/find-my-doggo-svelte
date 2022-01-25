@@ -91,7 +91,7 @@
 	bind:this={dropdownElement}
 	class="
 		{$$props.class}
-		relative inline-flex items-center rounded-md py-2 px-4 border border-gray-300 dark:border-gray-700
+		relative inline-flex items-center rounded-md border border-gray-300 py-2 px-4 dark:border-gray-700
 		{!$$props.class?.split(' ').some((name) => name.match(/^(.+:)?bg-\w+-\d+$/)) &&
 		'bg-gray-50 dark:bg-gray-800'}
 		text-sm font-medium shadow
@@ -107,7 +107,7 @@
 		<ul
 			bind:this={itemsElement}
 			transition:scaleFrom={{ from: 'top', duration: 100, start: 0.7 }}
-			class="absolute top-full mt-2 inset-x-0 rounded-md border border-gray-300 dark:border-gray-600 py-1 bg-white dark:bg-gray-700 shadow-lg"
+			class="absolute inset-x-0 top-full mt-2 rounded-md border border-gray-300 bg-white py-1 shadow-lg dark:border-gray-600 dark:bg-gray-700"
 		>
 			{#each items as item}
 				<button
@@ -115,7 +115,7 @@
 						typeof item !== 'string' && item.click?.();
 						menuShown = false;
 					}}
-					class="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-200 focus:bg-gray-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 cursor-pointer outline-none"
+					class="w-full cursor-pointer px-4 py-2 text-sm text-gray-700 outline-none hover:bg-gray-200 focus:bg-gray-200 dark:text-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600"
 					>{typeof item === 'string' ? item : item.content}
 				</button>
 			{/each}

@@ -38,7 +38,7 @@
 	/>
 	<button
 		aria-label="log in"
-		class="btn-brand dark:dark-btn-accent flex justify-center items-center uppercase tracking-wide"
+		class="btn-brand flex items-center justify-center uppercase tracking-wide dark:dark-btn-accent"
 		on:click|preventDefault={login}
 	>
 		{#if !isLoading}

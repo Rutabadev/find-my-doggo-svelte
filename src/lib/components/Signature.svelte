@@ -30,7 +30,7 @@
 	stroke-width="5"
 	stroke-linecap="round"
 	stroke-linejoin="round"
-	class="filter drop-shadow {$$props.class}"
+	class="drop-shadow filter {$$props.class}"
 >
 	<mask id="mask0" maskUnits="userSpaceOnUse" x="3" y="-2" width="459" height="215">
 		{#if paths[0].init}

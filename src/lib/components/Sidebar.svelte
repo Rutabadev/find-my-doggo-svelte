@@ -111,12 +111,12 @@
 		style="transform: translateX({$sidebarPosition}%)"
 	>
 		<!-- add sidebar space to the left to prevent hole during animation -->
-		<div class="absolute inset-y-0 right-full translate-x-px w-32 bg-brand-600" />
+		<div class="absolute inset-y-0 right-full w-32 translate-x-px bg-brand-600" />
 		<!-- border shadow to the right only -->
 		<div class="absolute inset-y-0 right-0 w-10 shadow-lg shadow-black" />
 		<div
 			use:focusTrap={$isSidebarOpened}
-			class="absolute inset-0 bg-brand-600 flex flex-col text-center text-gray-50"
+			class="absolute inset-0 flex flex-col bg-brand-600 text-center text-gray-50"
 		>
 			<div class="flex justify-between">
 				<button

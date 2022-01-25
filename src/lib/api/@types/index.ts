@@ -1,50 +1,50 @@
 /* eslint-disable */
 export type LoginUserDto = {
-  email: string
-  password: string
-}
+	email: string;
+	password: string;
+};
 
 export type LoggedInUserDto = {
-  access_token: string
-}
+	access_token: string;
+};
 
 export type User = {
-  email: string
-  roles: string[]
-  id: number
-  name: string
-  emailValid: boolean
-}
+	email: string;
+	roles: string[];
+	id: number;
+	name: string;
+	emailValid: boolean;
+};
 
 export type CreateUserDto = {
-  email: string
-  password: string
-  name: string
-}
+	email: string;
+	password: string;
+	name: string;
+};
 
 export type ForgotPasswordDto = {
-  email: string
-}
+	email: string;
+};
 
 export type ChangePasswordDto = {
-  uuid: string
-  password: string
-}
+	uuid: string;
+	password: string;
+};
 
 export type ValidateEmailDto = {
-  uuid: string
-}
+	uuid: string;
+};
 
 export type UpdateUserDto = {
-  email: string
-  password: string
-  roles: string[]
-  id: number
-  name: string
-  emailValid: boolean
-}
+	email: string;
+	password: string;
+	roles: string[];
+	id: number;
+	name: string;
+	emailValid: boolean;
+};
 
 export type Role = {
-  id: number
-  name: string
-}
+	id: number;
+	name: string;
+};

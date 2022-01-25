@@ -12,12 +12,12 @@
 </script>
 
 <header
-	class="h-16 shadow-lg shadow-brand-400 dark:shadow-brand-900 bg-brand-600 text-gray-50 grid grid-cols-3"
+	class="grid h-16 grid-cols-3 bg-brand-600 text-gray-50 shadow-lg shadow-brand-400 dark:shadow-brand-900"
 >
 	<div class="flex items-center gap-4">
 		<button
 			bind:this={openSidebarButton}
-			class="lg:hidden p-4 h-full hover:bg-brand-700 focus:bg-brand-700"
+			class="h-full p-4 hover:bg-brand-700 focus:bg-brand-700 lg:hidden"
 			on:click={() => {
 				isSidebarOpened.set(true);
 			}}
@@ -25,20 +25,20 @@
 			<Icon name="burger" class="h-8 drop-shadow" />
 		</button>
 		<LanguageSelect class="ml-4 max-lg:hidden" />
-		<DarkModeToggle class="max-lg:hidden h-full px-4" />
+		<DarkModeToggle class="h-full px-4 max-lg:hidden" />
 	</div>
 	<div class="flex items-center justify-center">
 		<a
 			href="/"
-			class="h-full px-4 text-xl sm:text-3xl whitespace-nowrap hover:bg-brand-700 flex items-center"
+			class="flex h-full items-center whitespace-nowrap px-4 text-xl hover:bg-brand-700 sm:text-3xl"
 		>
-			<Icon name="search" class="hidden lg:block mr-2 h-10" />
+			<Icon name="search" class="mr-2 hidden h-10 lg:block" />
 			Find My Doggo
 		</a>
 	</div>
 	<div class="flex justify-end">
 		{#if !$user}
-			<a href="/login" class="hidden lg:flex px-4 hover:bg-brand-700 items-center uppercase"
+			<a href="/login" class="hidden items-center px-4 uppercase hover:bg-brand-700 lg:flex"
 				>{$_('login.title')}</a
 			>
 		{:else}

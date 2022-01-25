@@ -12,8 +12,8 @@ module.exports = {
 				accent: colors.yellow,
 			},
 			screens: {
-				'max-lg': { max: screens.lg }
-			}
+				'max-lg': { max: screens.lg },
+			},
 		},
 	},
 	variants: {
@@ -23,8 +23,9 @@ module.exports = {
 		plugin(function ({ matchComponents, theme }) {
 			matchComponents(
 				{
-					'btn': (value) => ({
-						'@apply rounded border-2 border-transparent px-6 py-1 text-gray-100 font-medium tracking-wide active:translate-y-px active:brightness-90': '',
+					btn: (value) => ({
+						'@apply rounded border-2 border-transparent px-6 py-1 text-gray-100 font-medium tracking-wide active:translate-y-px active:brightness-90':
+							'',
 						backgroundColor: theme(`colors.${value}.600`),
 						'&:hover, &:focus-visible': {
 							backgroundColor: theme(`colors.${value}.700`),
@@ -35,7 +36,8 @@ module.exports = {
 						},
 					}),
 					'dark-btn': (value) => ({
-						'@apply rounded border-2 border-transparent px-6 py-1 text-white font-medium tracking-wide active:translate-y-px active:brightness-90': '',
+						'@apply rounded border-2 border-transparent px-6 py-1 text-white font-medium tracking-wide active:translate-y-px active:brightness-90':
+							'',
 						backgroundColor: theme(`colors.${value}.600`),
 						'&:hover, &:focus-visible': {
 							backgroundColor: theme(`colors.${value}.500`),
@@ -45,13 +47,13 @@ module.exports = {
 							'--tw-ring-color': theme(`ringColor.${value}.400`),
 						},
 					}),
-					'link': (value) => ({
+					link: (value) => ({
 						'@apply rounded hover:underline': '',
 						color: theme(`colors.${value}.600`),
 						'&:focus-visible': {
 							'@apply outline-none ring-2': '',
 							'--tw-ring-color': theme(`ringColor.${value}.400`),
-						}
+						},
 					}),
 					'dark-link': (value) => ({
 						'@apply rounded hover:underline': '',
@@ -59,11 +61,11 @@ module.exports = {
 						'&:focus-visible': {
 							'@apply outline-none ring-2': '',
 							'--tw-ring-color': theme(`ringColor.${value}.600`),
-						}
-					})
+						},
+					}),
 				},
 				{ values: Object.keys(theme('colors')).reduce((acc, key) => ({ ...acc, [key]: key }), {}) }
-			)
-		})
+			);
+		}),
 	],
 };

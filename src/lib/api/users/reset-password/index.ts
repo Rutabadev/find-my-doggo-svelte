@@ -1,9 +1,9 @@
 /* eslint-disable */
-import type * as Types from '../../@types'
+import type * as Types from '../../@types';
 
 export type Methods = {
-  post: {
-    status: 204
-    reqBody: Types.ChangePasswordDto
-  }
-}
+	post: {
+		status: 204;
+		reqBody: Types.ChangePasswordDto;
+	};
+};

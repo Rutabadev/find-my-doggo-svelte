@@ -13,6 +13,6 @@
 
 <div class="text-center">
 	<p class="text-xl">{$_('index.welcome')} <span class="italic">{$_('index.spoiler')}</span></p>
-	<Dog class="mt-8 mx-auto" />
+	<Dog class="mx-auto mt-8" />
 	<a href="/find" class="btn-brand dark:dark-btn-accent">{$_('index.find')}</a>
 </div>
